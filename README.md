@@ -52,9 +52,11 @@ This repository uses **dual licensing**:
 - **Documentation and data**: [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
 
 ## Methodology
-The DP2 index is a synthetic indicator based on the Pena Distance Methodology, widely used for multidimensional analysis.  
-For full details, please refer to the complete documentation:  
-[Full Methodology PDF](https://doi.org/10.23728/b2share.1e1hy-ta519)
+The DP2 (Pena Distance) methodology is an iterative approach that assigns weights to partial indicators based on their correlation with a global index, eliminating redundant variance and ensuring multidimensional comparability. It is widely used for quality of life and socioeconomic indicators.
+
+For a detailed explanation of the method, see the full document:  
+Full Methodology PDF
+
 
 ---
 
