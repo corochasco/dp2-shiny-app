@@ -55,7 +55,7 @@ This repository uses **dual licensing**:
 The DP2 (Pena Distance) methodology is an iterative approach that assigns weights to partial indicators based on their correlation with a global index, eliminating redundant variance and ensuring multidimensional comparability. It is widely used for quality of life and socioeconomic indicators.
 
 For a detailed explanation of the method, see the full document:  
-Full Methodology PDF
+(Full Methodology PDF)
 
 
 ---
