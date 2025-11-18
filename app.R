@@ -112,7 +112,9 @@ ui <- fluidPage(
       textInput("sheet_name", "Sheet Name", value = "Sheet1"),
       radioButtons("referencia", "Reference to normalize:", choices = c("minimum", "maximum"), selected = "minimum"),
       fileInput("shapefile", "Upload shapefile (.zip)", accept = ".zip"),
-      actionButton("run_dp2", "Run DP2 Index")
+      actionButton("run_dp2", "Run DP2 Index"),
+      downloadButton("download_excel", "Download Results"),   # NEW
+      actionButton("reset_app", "Reset App")                  # NEW
     ),
     mainPanel(
       tabsetPanel(
@@ -128,6 +130,19 @@ ui <- fluidPage(
     )
   )
 )
+
+
+sidebarPanel(
+  fileInput("excel_file", "Excel File", accept = ".xlsx"),
+  textInput("sheet_name", "Sheet Name", value = "Sheet1"),
+  radioButtons("referencia", "Reference to normalize:", choices = c("minimum", "maximum"), selected = "minimum"),
+  fileInput("shapefile", "Upload shapefile (.zip)", accept = ".zip"),
+  actionButton("run_dp2", "Run DP2 Index"),
+  downloadButton("download_excel", "Download Results"),   # NUEVO
+  actionButton("reset_app", "Reset App")                  # NUEVO
+)
+
+
 
 # Server
 server <- function(input, output, session) {
@@ -181,6 +196,30 @@ server <- function(input, output, session) {
     } else {
       "README.md not found."
     }
+  })
+  
+  # Botón para descargar resultados
+  output$download_excel <- downloadHandler(
+    filename = function() {
+      paste("DP2_results.xlsx")
+    },
+    content = function(file) {
+      req(resultado())
+      writexl::write_xlsx(resultado()$indice, file)  # Exporta la tabla DP2
+    }
+  )
+  
+  # Botón para resetear la app
+  observeEvent(input$reset_app, {
+    # Reinicia el objeto reactivo
+    resultado(NULL)
+    
+    # Reinicia los inputs
+    updateTextInput(session, "sheet_name", value = "Sheet1")
+    updateRadioButtons(session, "referencia", selected = "minimum")
+    
+    # Opcional: recarga completa (como refrescar la página)
+    session$reload()
   })
 }
 
