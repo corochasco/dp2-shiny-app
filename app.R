@@ -178,7 +178,7 @@ server <- function(input, output, session) {
     }
     req(shp_path)
     mapa <- st_read(shp_path, quiet = TRUE)
-    mapa_union <- left_join(mapa, resultado()$indice, by = c("CODITO" = "ID"))
+    mapa_union <- left_join(mapa, resultado()$indice, by = c("CODE" = "ID"))
     leaflet(mapa_union) %>%
       addTiles() %>%
       addPolygons(
