@@ -41,6 +41,7 @@ dp2-shiny-app/
 ├── www/                 # CSS or images
 └── README.md            # Documentation
 ```
+
 ## Output file
 The application generates an Excel file named DP2_outcomes_iterations.xlsx containing the following sheets:
 - **Final Index**
@@ -54,12 +55,12 @@ The application generates an Excel file named DP2_outcomes_iterations.xlsx conta
 - **Final Weights**
   - Variable: Name of the variable.
   - Weight: Final weight assigned in the DP2 calculation.
-  - Order: Order of inclusion in the iterative algorithm.
+  - Orden: Order of inclusion in the iterative algorithm.
 - **Iteration_X (for each iteration)**
   - ID: Join key.
   - DP2: Intermediate DP2 values for that iteration.
   - Variable / Weight: Weights at that iteration.
-  - Order: Variable order at that iteration.
+  - Orden: Variable order at that iteration.
 
 ## Citation
 Chasco, C., & Sánchez, B. (2025). *DP2: Pena Distance Methodology (1.0.0)* [Data set]. B2SHARE.  
@@ -76,6 +77,7 @@ The DP2 (Pena Distance) methodology is an iterative approach that assigns weight
 
 For a detailed explanation of the method, see the full document:  
 [DP2_methodology.pdf](https://github.com/corochasco/dp2-shiny-app/blob/main/DP2_methodology.pdf)
+
 
 
 ---
