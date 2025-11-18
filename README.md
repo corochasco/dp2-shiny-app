@@ -24,6 +24,7 @@ Run the app locally:
 ```R
 shiny::runApp("app.R")
 ```
+shinyapps.io: the app is published with a stable URL: https://coro-chasco.shinyapps.io/dp2-shiny-app/
 
 ## Input Files
 - **Excel file** containing variables for DP2 calculation
