@@ -27,9 +27,9 @@ shiny::runApp("app.R")
 shinyapps.io: the app is published with a stable URL: https://coro-chasco.shinyapps.io/dp2-shiny-app/
 
 ## Input Files
-- **Excel file** containing variables for DP2 calculation, the first of which is “CODITO” (join key)
+- **Excel file** containing variables for DP2 calculation, the first of which is “CODE” (join key)
 - **Shapefile** with polygons and fields:
-  - `CODITO` (join key)
+  - `CODE` (join key)
   - `MUNICIPIO` (for identification)
 
 ## File Structure
@@ -44,7 +44,7 @@ dp2-shiny-app/
 ## Output file
 The application generates an Excel file named DP2_outcomes_iterations.xlsx containing the following sheets:
 - **Final Index**
-  - ID: Join key (same as CODITO in the shapefile).
+  - ID: Join key (same as CODE in the shapefile).
   - DP2: Final DP2 index value (scaled as IBS = 100 × DP2 / mean).
 - **Correlations**
   - Correlation matrix between all input variables.
