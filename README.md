@@ -41,6 +41,25 @@ dp2-shiny-app/
 ├── www/                 # CSS or images
 └── README.md            # Documentation
 ```
+## Output file
+The application generates an Excel file named DP2_outcomes_iterations.xlsx containing the following sheets:
+- **Final Index**
+  - ID: Join key (same as CODITO in the shapefile).
+  - DP2: Final DP2 index value (scaled as IBS = 100 × DP2 / mean).
+- **Correlations**
+  - Correlation matrix between all input variables.
+- **Correlations with DP2**
+  - Variable: Name of the variable.
+  - Correlation: Correlation with the DP2 index.
+- **Final Weights**
+  - Variable: Name of the variable.
+  - Weight: Final weight assigned in the DP2 calculation.
+  - Order: Order of inclusion in the iterative algorithm.
+- **Iteration_X (for each iteration)**
+  - ID: Join key.
+  - DP2: Intermediate DP2 values for that iteration.
+  - Variable / Weight: Weights at that iteration.
+  - Order: Variable order at that iteration.
 
 ## Citation
 Chasco, C., & Sánchez, B. (2025). *DP2: Pena Distance Methodology (1.0.0)* [Data set]. B2SHARE.  
