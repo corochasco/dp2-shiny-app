@@ -16,7 +16,7 @@ This Shiny application computes the DP2 index (Pena Distance Methodology) for mu
 git clone https://github.com/yourusername/dp2-shiny-app.git
 Or download the repository: Click Code → Download ZIP, extract it and open app.R in RStudio.
 # Install required R packages
-install.packages(c("shiny", "sf", "readxl", "writexl", "dplyr", "tidyverse", "leaflet"))
+install.packages(c("shiny", "sf", "readxl", "writexl", "ggplot2", "dplyr", "tidyverse", "leaflet"))
 ```
 
 ## Usage
