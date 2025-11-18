@@ -27,7 +27,7 @@ shiny::runApp("app.R")
 shinyapps.io: the app is published with a stable URL: https://coro-chasco.shinyapps.io/dp2-shiny-app/
 
 ## Input Files
-- **Excel file** containing variables for DP2 calculation
+- **Excel file** containing variables for DP2 calculation, the first of which is “CODITO” (join key)
 - **Shapefile** with polygons and fields:
   - `CODITO` (join key)
   - `MUNICIPIO` (for identification)
