@@ -84,7 +84,7 @@ exportar_DP2_function <- function(res, archivo_salida = "DP2_outcomes_iterations
   writeData(wb, "Correlations with DP2", data.frame(Variable = names(res$correlaciones_con_DP2), Correlacion = res$correlaciones_con_DP2))
 
   addWorksheet(wb, "Final Weights")
-  pesos_df <- data.frame(Variable = names(res$pesos_finales), Peso = res$pesos_finales, Orden = match(names(res$pesos_finales), res$orden_final))
+  pesos_df <- data.frame(Variable = names(res$pesos_finales), weight = res$pesos_finales, Orden = match(names(res$pesos_finales), res$orden_final))
   pesos_df <- pesos_df[order(pesos_df$Orden), ]
   writeData(wb, "Final Weights", pesos_df)
 
@@ -94,7 +94,7 @@ exportar_DP2_function <- function(res, archivo_salida = "DP2_outcomes_iterations
     addWorksheet(wb, sheet_name)
     iter_df <- data.frame(ID = res$indice$ID, DP2 = iter$DP2)
     writeData(wb, sheet_name, iter_df, startCol = 1)
-    pesos_iter <- data.frame(Variable = names(iter$pesos), Peso = iter$pesos)
+    pesos_iter <- data.frame(Variable = names(iter$pesos), weight = iter$pesos)
     writeData(wb, sheet_name, pesos_iter, startCol = 4, startRow = 1)
     orden_iter <- data.frame(Orden = iter$orden)
     writeData(wb, sheet_name, orden_iter, startCol = 6, startRow = 1)
