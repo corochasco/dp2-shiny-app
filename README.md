@@ -78,7 +78,13 @@ The DP2 (Pena Distance) methodology is an iterative approach that assigns weight
 For a detailed explanation of the method, see the full document:  
 [DP2_methodology.pdf](https://github.com/corochasco/dp2-shiny-app/blob/main/DP2_methodology.pdf)
 
+### Convergence Settings
+The DP2 algorithm is iterative and stops when the difference between two consecutive iterations is below a tolerance (`tol`) or when the maximum number of iterations (`max_iter`) is reached.
 
+- **tol**: Convergence threshold (default: 1e-6). Lower values require stricter convergence.
+- **max_iter**: Maximum iterations allowed (default: 100).
+
+If the algorithm does not converge within `max_iter`, the app will display a warning and return the best approximation. You can increase `max_iter` or adjust `tol` to improve convergence.
 
 ---
 
