@@ -64,7 +64,7 @@ The application generates an Excel file named DP2_outcomes_iterations.xlsx conta
 
 ## Citation
 Chasco, C., & Sánchez, B. (2025). *DP2: Pena Distance Methodology (1.0.0)* [Data set]. B2SHARE.  
-https://doi.org/10.23728/b2share.1e1hy-ta519  
+[https://b2share.eudat.eu/records/8cm9h-ghq25)  
 *Developed with the assistance of Copilot AI (2025).*
 
 ## License
