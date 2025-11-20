@@ -1,90 +1,101 @@
 # DP2: Pena Distance Methodology Shiny App
 
 ## Description
-This Shiny application computes the DP2 index (Pena Distance Methodology) for multidimensional analysis. It allows normalization using minimum or maximum reference values, exports results to Excel, and visualizes them on an interactive map.
+This Shiny application computes the **DP2 index (Pena Distance Methodology)** for multidimensional analysis. It supports iterative weighting, normalization using minimum or maximum reference values, and provides advanced visualization and export options.
 
-## Features
-- Compute DP2 index for selected variables
-- Choose normalization reference (minimum or maximum)
-- Export results to Excel
-- Interactive map visualization using shapefiles
-- Clickable polygons to identify municipalities
+## Key Features
+- ✅ Compute DP2 index for selected variables.
+- ✅ Choose normalization reference (**minimum** or **maximum**).
+- ✅ Export results to Excel with **multiple sheets**:
+  - Final Index, Correlations, Weights, Iterations.
+- ✅ Interactive map visualization using shapefiles.
+- ✅ Clickable polygons to identify municipalities.
+- ✅ Additional charts:
+  - Histogram of DP2 index.
+  - Evolution of DP2 across iterations.
+- ✅ Advanced export:
+  - Includes charts and map as images in the Excel file.
+- ✅ Convergence control:
+  - Adjustable tolerance (`tol`) and maximum iterations (`max_iter`).
+  - Warning if convergence is not reached.
+
+---
 
 ## Installation
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/dp2-shiny-app.git
-Or download the repository: Click Code → Download ZIP, extract it and open app.R in RStudio.
+
+# Or download ZIP and open app.R in RStudio
 # Install required R packages
-install.packages(c("shiny", "sf", "readxl", "writexl", "ggplot2", "dplyr", "tidyverse", "leaflet"))
+install.packages(c("shiny", "sf", "readxl", "openxlsx", "ggplot2", "dplyr", "leaflet", "viridis", "shinycssloaders"))
+
+# For map export (optional):
+install.packages(c("mapview", "webshot2"))
 ```
+
+---
 
 ## Usage
 Run the app locally:
 ```R
 shiny::runApp("app.R")
 ```
-shinyapps.io: the app is published with a stable URL: https://coro-chasco.shinyapps.io/dp2-shiny-app/
+
+Or access the published version:
+**https://coro-chasco.shinyapps.io/dp2-shiny-app/**
+
+---
 
 ## Input Files
-- **Excel file** containing variables for DP2 calculation, the first of which is “CODE” (join key)
-- **Shapefile** with polygons and fields:
-  - `CODE` (join key)
-  - `MUNICIPIO` (for identification)
+- **Excel file**:
+  - First column: Join key (e.g., `CODE`).
+  - Remaining columns: Variables for DP2 calculation.
+- **Shapefile (.zip)**:
+  - Must include:
+    - `CODE` (join key).
+    - `MUNICIPIO` (municipality name for popups).
 
-## File Structure
-```
-dp2-shiny-app/
-│
-├── app.R                # Main Shiny app
-├── data/                # Input data files
-├── www/                 # CSS or images
-└── README.md            # Documentation
-```
+---
 
-## Output file
-The application generates an Excel file named DP2_outcomes_iterations.xlsx containing the following sheets:
-- **Final Index**
-  - ID: Join key (same as CODE in the shapefile).
-  - DP2: Final DP2 index value (scaled as IBS = 100 × DP2 / mean).
-- **Correlations**
-  - Correlation matrix between all input variables.
-- **Correlations with DP2**
-  - Variable: Name of the variable.
-  - Correlation: Correlation with the DP2 index.
-- **Final Weights**
-  - Variable: Name of the variable.
-  - Weight: Final weight assigned in the DP2 calculation.
-  - Orden: Order of inclusion in the iterative algorithm.
-- **Iteration_X (for each iteration)**
-  - ID: Join key.
-  - DP2: Intermediate DP2 values for that iteration.
-  - Variable / Weight: Weights at that iteration.
-  - Orden: Variable order at that iteration.
+## Output
+The app generates an Excel file: **DP2_outcomes_iterations.xlsx** with:
+- **Final Index**: ID and DP2 values (scaled as IBS = 100 × DP2 / mean).
+- **Correlations**: Matrix of correlations between variables.
+- **Correlations with DP2**: Correlation of each variable with DP2.
+- **Final Weights**: Variable weights and order of inclusion.
+- **Iteration_X**: DP2 values, weights, and order for each iteration.
+- **Charts**: Histogram and iteration evolution.
+- **Map**: Interactive map exported as image (if `webshot2` is installed).
 
-## Citation
-Chasco, C., & Sánchez, B. (2025). *DP2: Pena Distance Methodology (1.0.0)* [Data set]. B2SHARE.  
-[https://b2share.eudat.eu/records/8cm9h-ghq25)  
-*Developed with the assistance of Copilot AI (2025).*
+---
+
+## Convergence Settings
+- `tol`: Convergence threshold (default: 1e-6).
+- `max_iter`: Maximum iterations (default: 100).
+If convergence is not reached, a warning is displayed.
+
+---
 
 ## License
-This repository uses **dual licensing**:
-- **Code**: [MIT License](https://opensource.org/licenses/MIT)
-- **Documentation and data**: [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+- **Code**: MIT License.
+- **Documentation and data**: CC BY 4.0.
 
-## Methodology
-The DP2 (Pena Distance) methodology is an iterative approach that assigns weights to partial indicators based on their correlation with a global index, eliminating redundant variance and ensuring multidimensional comparability. It is widely used for quality of life and socioeconomic indicators.
+---
 
-For a detailed explanation of the method, see the full document:  
-[DP2_methodology.pdf](https://github.com/corochasco/dp2-shiny-app/blob/main/DP2_methodology.pdf)
+## Citation
+Chasco, C., & Sánchez, B. (2025). DP2: Pena Distance Methodology (1.0.1). B2SHARE.  
+[https://b2share.eudat.eu/records/8cm9h-ghq25](https://b2share.eudat.eu/records/8cm9h-ghq25)
 
-### Convergence Settings
-The DP2 algorithm is iterative and stops when the difference between two consecutive iterations is below a tolerance (`tol`) or when the maximum number of iterations (`max_iter`) is reached.
+---
 
-- **tol**: Convergence threshold (default: 1e-6). Lower values require stricter convergence.
-- **max_iter**: Maximum iterations allowed (default: 100).
+## Diagram of Workflow
+![Workflow Diagram](www/workflow-diagram.png)
 
-If the algorithm does not converge within `max_iter`, the app will display a warning and return the best approximation. You can increase `max_iter` or adjust `tol` to improve convergence.
+**Workflow:**
+```
+Excel + Shapefile → DP2 Calculation → Charts + Map → Export to Excel
+```
 
 ---
 
