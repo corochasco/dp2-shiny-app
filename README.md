@@ -90,7 +90,7 @@ Chasco, C., & Sánchez, B. (2025). DP2: Pena Distance Methodology (1.0.1). B2SHA
 ---
 
 ## Diagram of Workflow
-![Workflow Diagram](www_workflow-diagram.png)
+![Workflow Diagram](www/www_workflow-diagram.png)
 
 **Workflow:**
 ```
