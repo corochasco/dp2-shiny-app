@@ -13,8 +13,8 @@ This Shiny application computes the **DP2 index (Pena Distance Methodology)** fo
 - ✅ Additional charts:
   - Histogram of DP2 index.
   - Evolution of DP2 across iterations.
-- ✅ Advanced export:
-  - Includes charts and map as images in the Excel file.
+- ✅ Export:
+  - Includes tables and results in the Excel file.
 - ✅ Convergence control:
   - Adjustable tolerance (`tol`) and maximum iterations (`max_iter`).
   - Warning if convergence is not reached.
