@@ -10,6 +10,9 @@ library(shinycssloaders)
 
 map_export_available <- requireNamespace("mapview", quietly = TRUE) && requireNamespace("webshot2", quietly = TRUE)
 
+# ---------------------------
+# Función DP2 iterativo
+# ---------------------------
 DP2_iterativo <- function(file, sheet, referencia = "minimum", tol = 1e-6, max_iter = 100) {
   df <- read_excel(file, sheet = sheet)
   id <- df[[1]]
@@ -72,6 +75,53 @@ DP2_iterativo <- function(file, sheet, referencia = "minimum", tol = 1e-6, max_i
   )
 }
 
+# ---------------------------
+# Función para exportar resultados completos
+# ---------------------------
+exportar_DP2_function <- function(res, archivo_salida = "DP2_outcomes_iterations.xlsx") {
+  wb <- createWorkbook()
+  
+  # Hoja 1: Índice final
+  addWorksheet(wb, "Final Index")
+  writeData(wb, "Final Index", res$indice)
+  
+  # Hoja 2: Correlaciones entre variables
+  addWorksheet(wb, "Correlations")
+  writeData(wb, "Correlations", res$correlaciones_entre_variables, rowNames = TRUE)
+  
+  # Hoja 3: Correlaciones con DP2
+  addWorksheet(wb, "Correlations with DP2")
+  writeData(wb, "Correlations with DP2",
+            data.frame(Variable = names(res$correlaciones_con_DP2),
+                       Correlation = res$correlaciones_con_DP2))
+  
+  # Hoja 4: Pesos finales
+  pesos_df <- data.frame(Variable = names(res$pesos_finales),
+                         Weight = res$pesos_finales,
+                         Order = match(names(res$pesos_finales), res$orden_final))
+  pesos_df <- pesos_df[order(pesos_df$Order), ]
+  addWorksheet(wb, "Final Weights")
+  writeData(wb, "Final Weights", pesos_df)
+  
+  # Hojas de iteraciones
+  for (i in seq_along(res$historial_iteraciones)) {
+    iter <- res$historial_iteraciones[[i]]
+    sheet_name <- paste0("Iteration_", i)
+    addWorksheet(wb, sheet_name)
+    iter_df <- data.frame(ID = res$indice$ID, DP2 = iter$DP2)
+    writeData(wb, sheet_name, iter_df, startCol = 1)
+    pesos_iter <- data.frame(Variable = names(iter$pesos), Weight = iter$pesos)
+    writeData(wb, sheet_name, pesos_iter, startCol = 4, startRow = 1)
+    orden_iter <- data.frame(Order = iter$orden)
+    writeData(wb, sheet_name, orden_iter, startCol = 6, startRow = 1)
+  }
+  
+  saveWorkbook(wb, archivo_salida, overwrite = TRUE)
+}
+
+# ---------------------------
+# Interfaz UI
+# ---------------------------
 ui <- fluidPage(
   titlePanel("DP2 Index Calculator"),
   fluidRow(
@@ -106,6 +156,9 @@ ui <- fluidPage(
   )
 )
 
+# ---------------------------
+# Servidor
+# ---------------------------
 server <- function(input, output, session) {
   resultado <- reactiveVal(NULL)
   mapa_union <- reactiveVal(NULL)
@@ -208,13 +261,14 @@ server <- function(input, output, session) {
     }
   })
   
+  # Botón para descargar informe completo
   output$download_excel <- downloadHandler(
     filename = function() {
       "DP2_outcomes_iterations.xlsx"
     },
     content = function(file) {
       req(resultado())
-      writexl::write_xlsx(resultado()$indice, file)
+      exportar_DP2_function(resultado(), archivo_salida = file)
     }
   )
   
@@ -227,4 +281,5 @@ server <- function(input, output, session) {
   })
 }
 
+# Ejecutar la app
 shinyApp(ui, server)
