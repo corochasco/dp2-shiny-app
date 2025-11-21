@@ -65,8 +65,6 @@ The app generates an Excel file: **DP2_outcomes_iterations.xlsx** with:
 - **Correlations with DP2**: Correlation of each variable with DP2.
 - **Final Weights**: Variable weights and order of inclusion.
 - **Iteration_X**: DP2 values, weights, and order for each iteration.
-- **Charts**: Histogram and iteration evolution.
-- **Map**: Interactive map exported as image (if `webshot2` is installed).
 
 ---
 
