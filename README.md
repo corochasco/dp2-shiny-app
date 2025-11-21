@@ -83,7 +83,7 @@ If convergence is not reached, a warning is displayed.
 
 ## Citation
 Chasco, C., & Sánchez, B. (2025). DP2: Pena Distance Methodology (1.0.1). B2SHARE.  
-[https://b2share.eudat.eu/records/8cm9h-ghq25](https://b2share.eudat.eu/records/8cm9h-ghq25)
+[https://b2share.eudat.eu/records/atfsr-hr231)
 
 ---
 
