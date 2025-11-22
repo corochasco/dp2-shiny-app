@@ -54,7 +54,7 @@ Or access the published version:
 - **Shapefile (.zip)**:
   - Must include:
     - `CODE` (join key).
-    - `MUNICIPIO` (municipality name for popups).
+    - `MUNICIPIO` (spatial region name for popups).
 
 ---
 
